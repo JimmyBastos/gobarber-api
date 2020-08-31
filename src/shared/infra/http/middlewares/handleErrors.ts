@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from 'express'
 import AppError from '@shared/errors/AppError'
 
-function handleErrors (error: Error, request: Request, response: Response, next: NextFunction) {
+function handleErrors(error: Error, request: Request, response: Response, next: NextFunction) {
   if (error instanceof AppError) {
     return response
       .status(error.statusCode)
       .json({
         status: 'error',
-        messate: error.message
+        message: error.message
       })
   }
 
@@ -17,7 +17,7 @@ function handleErrors (error: Error, request: Request, response: Response, next:
     .status(500)
     .json({
       status: 'error',
-      messate: 'Internal Servert Error'
+      message: 'Internal Servert Error'
     })
 }
 
