@@ -1,4 +1,4 @@
-import multer, { Options } from 'multer'
+import multer from 'multer'
 import path from 'path'
 import crypto from 'crypto'
 
@@ -8,7 +8,7 @@ const uploadConfig = {
   directory: uploadDirectory,
   storage: multer.diskStorage({
     destination: uploadDirectory,
-    filename(request, file, callback) {
+    filename (request, file, callback) {
       const fileHash = crypto.randomBytes(10).toString('hex')
       const fileName = `${fileHash}-${file.originalname}`
 
