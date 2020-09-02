@@ -18,6 +18,6 @@ app.use(routes)
 
 app.use(handleErrors)
 
-app.use('/files', express.static(uploadConfig.directory))
+app.use('/files', express.static(uploadConfig.tempFolder))
 
 export default app
