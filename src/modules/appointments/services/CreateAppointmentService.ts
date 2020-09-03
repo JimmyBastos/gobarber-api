@@ -11,12 +11,12 @@ interface IRequest {
 
 @injectable()
 class CreateAppointmentService {
-  constructor(
+  constructor (
     @inject('AppointmentRepository')
     private appointmentsRepository: IAppointmentRepository
   ) { }
 
-  public async execute({ provider_id, date }: IRequest): Promise<Appointment> {
+  public async execute ({ provider_id, date }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date)
 
     const foundAppointmentInSameDate = await this.appointmentsRepository.findByDate(

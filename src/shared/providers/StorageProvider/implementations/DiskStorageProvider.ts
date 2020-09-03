@@ -1,11 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 
-import IStorageProvider from '../contracts/IStorageProvider';
-import uploadConfig from '@config/upload';
+import IStorageProvider from '../contracts/IStorageProvider'
+import uploadConfig from '@config/upload'
 
 class DiskStorageProvider implements IStorageProvider {
-  public async saveFile(file: string): Promise<string> {
+  public async saveFile (file: string): Promise<string> {
     await fs.promises.rename(
       path.resolve(uploadConfig.tempFolder),
       path.resolve(uploadConfig.uploadsFolder)
@@ -14,18 +14,17 @@ class DiskStorageProvider implements IStorageProvider {
     return file
   }
 
-  public async deleteFile(file: string): Promise<void> {
+  public async deleteFile (file: string): Promise<void> {
     const filePath = path.resolve(uploadConfig.uploadsFolder, file)
 
     try {
       await fs.promises.stat(filePath)
     } catch {
-      return;
+      return
     }
 
     await fs.promises.unlink(filePath)
   }
-
 }
 
 export default DiskStorageProvider

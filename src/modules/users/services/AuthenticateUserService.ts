@@ -1,4 +1,3 @@
-import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
@@ -6,7 +5,7 @@ import authConfig from '@config/auth'
 import AppError from '@shared/errors/AppError'
 
 import User from '../infra/typeorm/entities/User'
-import IUsersRepository from '../repositories/IUserRepository'
+import IUsersRepository from '../repositories/IUsersRepository'
 import IHashProvider from '../providers/HashProvider/contracts/IHashProvider'
 
 interface IRequest {
@@ -21,14 +20,14 @@ interface IResponse {
 
 @injectable()
 class AuthenticateUserService {
-  constructor(
+  constructor (
     @inject('UserRepository')
     private usersRepository: IUsersRepository,
     @inject('HashProvider')
     private hashProvider: IHashProvider
   ) { }
 
-  public async execute({ email, password }: IRequest): Promise<IResponse> {
+  public async execute ({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {

@@ -6,11 +6,11 @@ import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointment
 class AppointmentsRepository implements IAppointmentRepository {
   private ormRepository: Repository<Appointment>
 
-  constructor() {
+  constructor () {
     this.ormRepository = getRepository(Appointment)
   }
 
-  public async create({ provider_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
+  public async create ({ provider_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = this.ormRepository.create({
       provider_id,
       date
@@ -21,7 +21,7 @@ class AppointmentsRepository implements IAppointmentRepository {
     return appointment
   }
 
-  public async findByDate(date: Date): Promise<Appointment | undefined> {
+  public async findByDate (date: Date): Promise<Appointment | undefined> {
     const foundAppointment = await this.ormRepository.findOne({
       where: { date }
     })

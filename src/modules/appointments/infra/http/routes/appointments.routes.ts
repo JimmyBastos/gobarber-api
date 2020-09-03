@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import isAuthenticated from '@modules/users/infra/http/middlewares/isAuthenticated'
-import AppointmentsController from "../controllers/AppointmentsController";
+import AppointmentsController from '../controllers/AppointmentsController'
 
 const appointmentsRouter = Router()
 const appointmentsController = new AppointmentsController()

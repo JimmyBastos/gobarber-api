@@ -1,13 +1,11 @@
-import CreateUserService from "./CreateUserService";
-import AuthenticateUserService from "./AuthenticateUserService";
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import AppError from '@shared/errors/AppError';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
-
+import CreateUserService from './CreateUserService'
+import AuthenticateUserService from './AuthenticateUserService'
+import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository'
+import AppError from '@shared/errors/AppError'
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider'
 
 describe('Authenticate User', () => {
-
-  it('shold be able to authenticate user', async () => {
+  it('should be able to authenticate user', async () => {
     const usersRepository = new FakeUsersRepository()
     const hashProvider = new FakeHashProvider()
 
@@ -21,10 +19,10 @@ describe('Authenticate User', () => {
       hashProvider
     )
 
-    const user = await createUser.execute({
+    await createUser.execute({
       name: 'Jhon Due',
       email: 'jhondoe@mail.com',
-      password: '123456',
+      password: '123456'
     })
 
     const response = await authenticateUser.execute({
@@ -35,8 +33,7 @@ describe('Authenticate User', () => {
     expect(response).toHaveProperty('token')
   })
 
-
-  it('shold be able to authenticate with a non existing user', async () => {
+  it('should be able to authenticate with a non existing user', async () => {
     const usersRepository = new FakeUsersRepository()
     const hashProvider = new FakeHashProvider()
 
@@ -45,17 +42,15 @@ describe('Authenticate User', () => {
       hashProvider
     )
 
-    try {
-      await authenticateUser.execute({
+    await expect(
+      authenticateUser.execute({
         email: 'jhondoe@mail.com',
         password: '123456'
       })
-    } catch (error) {
-      expect(error).toBeInstanceOf(AppError)
-    }
+    ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('shold be able to authenticate with wrong password', async () => {
+  it('should be able to authenticate with wrong password', async () => {
     const usersRepository = new FakeUsersRepository()
     const hashProvider = new FakeHashProvider()
 
@@ -69,20 +64,17 @@ describe('Authenticate User', () => {
       hashProvider
     )
 
-    try {
-      await createUser.execute({
-        name: 'Jhon Due',
-        email: 'jhondoe@mail.com',
-        password: '123456',
-      })
+    await createUser.execute({
+      name: 'Jhon Due',
+      email: 'jhondoe@mail.com',
+      password: '123456'
+    })
 
-      await authenticateUser.execute({
+    await expect(
+      authenticateUser.execute({
         email: 'jhondoe@mail.com',
         password: '654321'
       })
-
-    } catch (error) {
-      expect(error).toBeInstanceOf(AppError)
-    }
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

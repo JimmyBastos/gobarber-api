@@ -1,12 +1,9 @@
-import path from 'path'
-import fs from 'fs'
 import { inject, injectable } from 'tsyringe'
 
-import uploadConfig from '@config/upload'
 import AppError from '@shared/errors/AppError'
 
 import IStorageProvider from '@shared/providers/StorageProvider/contracts/IStorageProvider'
-import IUsersRepository from '../repositories/IUserRepository'
+import IUsersRepository from '../repositories/IUsersRepository'
 import User from '../infra/typeorm/entities/User'
 
 interface IRequest {
@@ -16,20 +13,18 @@ interface IRequest {
 
 @injectable()
 class UpdateUserAvatarService {
-  constructor(
+  constructor (
     @inject('UserRepository')
     private usersRepository: IUsersRepository,
     @inject('StorageProvider')
     private storageProvider: IStorageProvider
   ) { }
 
-
-  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+  public async execute ({ user_id, avatarFilename }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id)
 
     if (!user) {
-      throw new AppError("Invalid User");
-
+      throw new AppError('Invalid User')
     }
 
     if (user.avatar) {

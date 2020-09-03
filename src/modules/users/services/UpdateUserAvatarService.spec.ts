@@ -1,14 +1,11 @@
-import CreateUserService from "./CreateUserService";
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import AppError from '@shared/errors/AppError';
-import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
-import UpdateUserAvatarService from './UpdateUserAvatarService';
-import FakeStorageProvider from '@shared/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository'
+import AppError from '@shared/errors/AppError'
 
+import UpdateUserAvatarService from './UpdateUserAvatarService'
+import FakeStorageProvider from '@shared/providers/StorageProvider/fakes/FakeStorageProvider'
 
 describe('Update User Avatar', () => {
-
-  it('shold be able to update user avatar', async () => {
+  it('should be able to update user avatar', async () => {
     const usersRepository = new FakeUsersRepository()
     const storageProvider = new FakeStorageProvider()
 
@@ -19,8 +16,8 @@ describe('Update User Avatar', () => {
 
     const user = await usersRepository.create({
       name: 'Jhon Due',
-      email: 'jhon@mail.com',
-      password: '123456',
+      email: 'jhondoe@mail.com',
+      password: '123456'
     })
 
     await updateUserAvatar.execute({
@@ -31,8 +28,7 @@ describe('Update User Avatar', () => {
     expect(user.avatar).toBe('avatar.jpg')
   })
 
-
-  it('shold not be able to update a non existing user avatar', async () => {
+  it('should not be able to update a non existing user avatar', async () => {
     const usersRepository = new FakeUsersRepository()
     const storageProvider = new FakeStorageProvider()
 
@@ -41,17 +37,15 @@ describe('Update User Avatar', () => {
       storageProvider
     )
 
-    try {
-      await updateUserAvatar.execute({
+    await expect(
+      updateUserAvatar.execute({
         user_id: 'non-existing-user',
         avatarFilename: 'avatar.jpg'
       })
-    } catch (error) {
-      expect(error).toBeInstanceOf(AppError)
-    }
+    ).rejects.toBeInstanceOf(AppError)
   })
 
-  it('shold delete old avatar when a new avatar is set', async () => {
+  it('should delete old avatar when a new avatar is set', async () => {
     const usersRepository = new FakeUsersRepository()
     const storageProvider = new FakeStorageProvider()
 
@@ -64,8 +58,8 @@ describe('Update User Avatar', () => {
 
     const user = await usersRepository.create({
       name: 'Jhon Due',
-      email: 'jhon@mail.com',
-      password: '123456',
+      email: 'jhondoe@mail.com',
+      password: '123456'
     })
 
     await updateUserAvatar.execute({
@@ -80,8 +74,5 @@ describe('Update User Avatar', () => {
 
     expect(deleteFile).toHaveBeenCalledWith('avatar.jpg')
     expect(user.avatar).toBe('avatar2.jpg')
-
   })
-
-
 })

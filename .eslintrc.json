@@ -17,10 +17,13 @@
     ],
     "rules": {
         "no-undef": "off",
-        "no-unused-vars": "off",
         "no-useless-constructor": "off",
+        "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": [
-            "error"
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
         ],
         "@typescript-eslint/naming-convention": [
             "error",
@@ -37,8 +40,8 @@
         "camelcase": [
             "warn",
             {
-                "ignoreDestructuring": true,
-                "ignoreProperties": true
+                "properties": "never",
+                "ignoreDestructuring": true
             }
         ]
     }
