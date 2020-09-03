@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
 
-import { container } from "tsyringe"
+import { container } from 'tsyringe'
 
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService'
 
 class SessionsController {
-  public async create(request: Request, response: Response): Promise<Response> {
+  public async create (request: Request, response: Response): Promise<Response> {
     try {
       const { email, password } = request.body
 

@@ -6,16 +6,16 @@ import { Repository, getRepository } from 'typeorm'
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>
 
-  constructor() {
+  constructor () {
     this.ormRepository = getRepository(User)
   }
 
-  public async findById(id: string): Promise<User | undefined> {
+  public async findById (id: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne(id)
     return user
   }
 
-  public async findByEmail(email: string): Promise<User | undefined> {
+  public async findByEmail (email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
       where: { email }
     })
@@ -23,8 +23,7 @@ class UsersRepository implements IUsersRepository {
     return user
   }
 
-  public async create({ name, email, password }: IUserDTO): Promise<User> {
-
+  public async create ({ name, email, password }: IUserDTO): Promise<User> {
     const user = this.ormRepository.create({
       name,
       email,
@@ -36,10 +35,9 @@ class UsersRepository implements IUsersRepository {
     return user
   }
 
-  public save(user: User): Promise<User> {
+  public save (user: User): Promise<User> {
     return this.ormRepository.save(user)
   }
-
 }
 
 export default UsersRepository
