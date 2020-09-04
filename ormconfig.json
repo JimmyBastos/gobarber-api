@@ -6,7 +6,7 @@
   "password": "gobarber",
   "database": "gobarberdb",
   "entities": [
-    "./src/mudules/**/infra/typeorm/entities/**/*.ts"
+    "./src/modules/**/infra/typeorm/entities/**/*.ts"
   ],
   "migrations": [
     "./src/shared/infra/typeorm/migrations/**/*.ts"
