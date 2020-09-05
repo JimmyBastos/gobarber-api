@@ -3,7 +3,7 @@ import IMailTemplateParserDTO from '../dtos/IMailTemplateParserDTO'
 
 class FakeMailTemplateProvider implements IMailTemplateProvider {
   public async parse (data: IMailTemplateParserDTO): Promise<string> {
-    return data.template
+    return data.file
   }
 }
 

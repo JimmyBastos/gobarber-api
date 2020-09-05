@@ -3,7 +3,7 @@ interface ITemplateVariables {
 }
 
 interface IMailTemplateParserDTO {
-  template: string
+  file: string
   varibales: ITemplateVariables
 }
 
