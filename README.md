@@ -4,21 +4,21 @@
 
 **Requisitos Funcionais**
 
-- [ ] O usuário deve poder recuperar sua senha informando seu e-mail;
+- [x] O usuário deve poder recuperar sua senha informando seu e-mail;
 
-- [ ] O usuário deve receber um email informando as instruções de recuperação de senha;
+- [x] O usuário deve receber um email informando as instruções de recuperação de senha;
 
-- [ ] O usuário deve poder restaurar a senha;
+- [x] O usuário deve poder restaurar a senha;
 
 **Regras de Negócio**
 
 - [ ] O link enviado por email para resetar a senhar deve expirar em duas horas;
 
-- [ ] O usuário precisa confirmar a nova senha ao resetar sua senha;
+- [x] O usuário precisa confirmar a nova senha ao resetar sua senha;
 
 **Requisitos Não Funcionais**
 
-- [ ] Utilizar mailtrap para testar envios de email em ambiente de desenvolvimento;
+- [x] Utilizar Ethereal para testar envios de email em ambiente de desenvolvimento;
 
 - [ ] Utilizar o Amazon SES para envios de email em producão;
 
