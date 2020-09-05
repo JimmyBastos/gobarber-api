@@ -4,21 +4,28 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository'
 import AppError from '@shared/errors/AppError'
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider'
 
+let usersRepository: FakeUsersRepository
+let hashProvider: FakeHashProvider
+let createUser: CreateUserService
+let authenticateUser: AuthenticateUserService
+
 describe('Authenticate User', () => {
+  beforeEach(() => {
+    usersRepository = new FakeUsersRepository()
+    hashProvider = new FakeHashProvider()
+
+    createUser = new CreateUserService(
+      usersRepository,
+      hashProvider
+    )
+
+    authenticateUser = new AuthenticateUserService(
+      usersRepository,
+      hashProvider
+    )
+  })
+
   it('should be able to authenticate user', async () => {
-    const usersRepository = new FakeUsersRepository()
-    const hashProvider = new FakeHashProvider()
-
-    const createUser = new CreateUserService(
-      usersRepository,
-      hashProvider
-    )
-
-    const authenticateUser = new AuthenticateUserService(
-      usersRepository,
-      hashProvider
-    )
-
     await createUser.execute({
       name: 'Jhon Due',
       email: 'jhondoe@mail.com',
@@ -34,14 +41,6 @@ describe('Authenticate User', () => {
   })
 
   it('should be able to authenticate with a non existing user', async () => {
-    const usersRepository = new FakeUsersRepository()
-    const hashProvider = new FakeHashProvider()
-
-    const authenticateUser = new AuthenticateUserService(
-      usersRepository,
-      hashProvider
-    )
-
     await expect(
       authenticateUser.execute({
         email: 'jhondoe@mail.com',
@@ -51,19 +50,6 @@ describe('Authenticate User', () => {
   })
 
   it('should be able to authenticate with wrong password', async () => {
-    const usersRepository = new FakeUsersRepository()
-    const hashProvider = new FakeHashProvider()
-
-    const createUser = new CreateUserService(
-      usersRepository,
-      hashProvider
-    )
-
-    const authenticateUser = new AuthenticateUserService(
-      usersRepository,
-      hashProvider
-    )
-
     await createUser.execute({
       name: 'Jhon Due',
       email: 'jhondoe@mail.com',
