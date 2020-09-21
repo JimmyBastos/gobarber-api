@@ -24,7 +24,7 @@ class UpdateUserAvatarService {
     const user = await this.usersRepository.findById(user_id)
 
     if (!user) {
-      throw new AppError('Invalid User')
+      throw new AppError('Invalid User', 404)
     }
 
     if (user.avatar) {

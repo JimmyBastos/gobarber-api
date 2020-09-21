@@ -39,19 +39,17 @@ describe('Reset User Password', () => {
 
     const { token } = await fakeUserTokensRepository.generate(user.id)
 
-    const newPassword = '654321'
-
     await resetPassword.execute({
       token,
-      password: newPassword
+      password: '654321'
     })
 
     const updatedUser = await fakeUsersRepository.findById(user.id)
 
-    expect(generateHash).toHaveBeenCalledWith(newPassword)
+    expect(generateHash).toHaveBeenCalledWith('654321')
 
     expect(
-      await fakeHashProvider.compare(updatedUser?.password as string, newPassword)
+      await fakeHashProvider.compare('654321', updatedUser?.password as string)
     ).toBeTruthy()
   })
 
