@@ -12,7 +12,7 @@
 
 **Regras de Negócio**
 
-- [ ] O link enviado por email para resetar a senhar deve expirar em duas horas;
+- [x] O link enviado por email para resetar a senhar deve expirar em duas horas;
 
 - [x] O usuário precisa confirmar a nova senha ao resetar sua senha;
 
@@ -30,15 +30,15 @@
 
 **Requisitos Funcionais**
 
-- [ ] O usuário deve poder atualizar seu nome, email e senha;
+- [x] O usuário deve poder atualizar seu nome, email e senha;
 
 **Requisitos Não Funcionais**
 
-- [ ] O usuário não pode alterar um email para outro já utilizado;
+- [x] O usuário não pode alterar um email para outro já utilizado;
 
 - [ ] Para alterar sua senha o usuário deve informar sua senha antiga;
 
-- [ ] Para alterar sua senha o usuário precisa confirmar a nova senha;
+- [x] Para alterar sua senha o usuário precisa confirmar a nova senha;
 
 
 
