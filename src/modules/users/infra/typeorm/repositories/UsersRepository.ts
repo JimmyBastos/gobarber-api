@@ -1,7 +1,10 @@
 import IUsersRepository from '@modules/users/repositories/IUsersRepository'
+import IListProvidersDTO from '@modules/users/dtos/IListProvidersDTO'
 import IUserDTO from '@modules/users/dtos/IUserDTO'
+
 import User from '../entities/User'
-import { Repository, getRepository } from 'typeorm'
+
+import { Repository, getRepository, Not } from 'typeorm'
 
 class UsersRepository implements IUsersRepository {
   private ormRepository: Repository<User>
@@ -21,6 +24,21 @@ class UsersRepository implements IUsersRepository {
     })
 
     return user
+  }
+
+  public async findAllProviders ({ except_user_id }: IListProvidersDTO): Promise<User[]> {
+    let providers = await this.ormRepository.find({
+      where: {
+        id: Not(except_user_id)
+      }
+    })
+
+    providers = providers.map(provider => {
+      delete provider.password
+      return provider
+    })
+
+    return providers
   }
 
   public async create ({ name, email, password }: IUserDTO): Promise<User> {
