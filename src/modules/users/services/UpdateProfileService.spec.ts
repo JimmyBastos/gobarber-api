@@ -56,7 +56,7 @@ describe('Update Profile', () => {
       password: '123456'
     })
 
-    const updatedUser = await updateProfile.execute({
+    await updateProfile.execute({
       user_id: user.id,
       name: 'Jhon Due',
       email: 'jhondoe@mail.com',
@@ -65,10 +65,6 @@ describe('Update Profile', () => {
     })
 
     expect(generateHash).toHaveBeenCalledWith('654321')
-
-    expect(
-      await fakeHashProvider.compare('654321', updatedUser.password as string)
-    ).toBeTruthy()
   })
 
   it('should not be able to update email to a same email from another', async () => {
