@@ -28,6 +28,19 @@ class AppointmentsRepository implements IAppointmentRepository {
 
     return foundAppointment || undefined
   }
+
+  public async findAllFromProviderInMonth ({ provider_id, month, year }: IFindAllProviderAppointmentsInMonthDTO): Promise<Appointment[]> {
+    const targetMonth = formatDate(new Date(`${year}-${month}`), 'YYYY-MM')
+
+    const appointmentList = this.ormRepository.find({
+      where: {
+        provider_id,
+        date: Raw(dateField => `to_char(${dateField}, 'YYYY-MM') = '${targetMonth}'`)
+      }
+    })
+
+    return appointmentList
+  }
 }
 
 export default AppointmentsRepository

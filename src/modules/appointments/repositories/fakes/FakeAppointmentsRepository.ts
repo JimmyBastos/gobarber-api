@@ -30,6 +30,18 @@ class FakeAppointmentsRepository implements IAppointmentRepository {
 
     return foundAppointment
   }
+
+  public async findAllFromProviderInMonth ({ provider_id, month, year }: IFindAllProviderAppointmentsInMonthDTO): Promise<Appointment[]> {
+    const appointmentList = this.appointments.filter(
+      appointment => (
+        appointment.provider_id === provider_id &&
+        getMonth(appointment.date) + 1 === month &&
+        getYear(appointment.date) === year
+      )
+    )
+
+    return appointmentList
+  }
 }
 
 export default FakeAppointmentsRepository
