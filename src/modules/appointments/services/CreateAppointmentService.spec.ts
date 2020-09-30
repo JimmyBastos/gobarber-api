@@ -16,7 +16,8 @@ describe('Create Appointment', () => {
 
   it('should be able to create a new appointment', async () => {
     const appointment = await createAppointment.execute({
-      provider_id: '1',
+      provider_id: 'mock-provider-id',
+      customer_id: 'mock-customer-id',
       date: new Date()
     })
 
@@ -27,13 +28,15 @@ describe('Create Appointment', () => {
     const appointmentDate = new Date('2020-06-01 11:00')
 
     await createAppointment.execute({
-      provider_id: '1',
+      provider_id: 'mock-provider-id',
+      customer_id: 'mock-customer-id',
       date: appointmentDate
     })
 
     await expect(
       createAppointment.execute({
-        provider_id: '1',
+        provider_id: 'mock-provider-id',
+        customer_id: 'mock-customer-id',
         date: appointmentDate
       })
     ).rejects.toBeInstanceOf(AppError)

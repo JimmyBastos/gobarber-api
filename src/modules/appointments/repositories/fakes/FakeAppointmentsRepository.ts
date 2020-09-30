@@ -11,12 +11,13 @@ import IFindAllProviderAppointmentsInDayDTO from '@modules/appointments/dtos/IFi
 class FakeAppointmentsRepository implements IAppointmentRepository {
   private appointments: Appointment[] = []
 
-  public async create ({ provider_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
+  public async create ({ provider_id, customer_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = new Appointment()
 
     Object.assign(appointment, {
       id: uuid(),
       provider_id,
+      customer_id,
       date
     })
 

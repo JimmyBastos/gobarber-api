@@ -22,6 +22,7 @@ describe('List Providers', () => {
 
     await fakeAppointmentsRepository.create({
       provider_id: 'mock-provider-id',
+      customer_id: 'mock-customer-id',
       date: new Date(2020, 9, 17, 8, 0, 0)
     })
 
@@ -30,6 +31,7 @@ describe('List Providers', () => {
         async hour => {
           await fakeAppointmentsRepository.create({
             provider_id: 'mock-provider-id',
+            customer_id: 'mock-customer-id',
             date: new Date(2020, 9, 18, hour, 0, 0)
           })
         }
