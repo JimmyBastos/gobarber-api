@@ -37,12 +37,6 @@
                 ]
             }
         ],
-        "camelcase": [
-            "warn",
-            {
-                "properties": "never",
-                "ignoreDestructuring": true
-            }
-        ]
+        "camelcase": "off"
     }
 }
