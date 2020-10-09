@@ -46,21 +46,21 @@
 
 **Requisitos Funcionais**
 
-- [z] O usuário deve poder listar seus agendamentos em um dia específico;
+- [x] O usuário deve poder listar seus agendamentos em um dia específico;
 
-- [ ] O prestador dever receber uma notificação sempre que houver um novo agendamento;
+- [x] O prestador dever receber uma notificação sempre que houver um novo agendamento;
 
 - [ ] O prestador deve poder visualizar as notificações não lidas;
 
 **Regras de Negócio**
 
-- [ ] A notificação dever ter um status de lida ou não lida;
+- [x] A notificação dever ter um status de lida ou não lida;
 
 **Requisitos Não Funcionais**
 
 - [ ] Os agendamentos do prestador devem ser armazenados em cache;
 
-- [ ] As notificações do prestador devem ser armazenadas no MongoDB;
+- [x] As notificações do prestador devem ser armazenadas no MongoDB;
 
 - [ ] As notificações do prestador devem ser enviadas em tempo-real via web socket.
 
@@ -80,7 +80,7 @@
 
 **Regras de Negócio**
 
-- [ ] Cada agendamento devem durar 1h hora exatamente;
+- [x] Cada agendamento devem durar 1h hora exatamente;
 
 - [x] Os agendamentos devem estar disponíveis de 8h às 18h (primeiros às 8h, ultimo às 18h);
 
