@@ -2,17 +2,20 @@ import CreateAppointmentService from './CreateAppointmentService'
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository'
 import AppError from '@shared/errors/AppError'
 
-import { isAfter } from 'date-fns'
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
 
 let createAppointment: CreateAppointmentService
 let appointmentsRepository: FakeAppointmentsRepository
+let notificationsRepository: FakeNotificationsRepository
 
 describe('Create Appointment', () => {
   beforeEach(() => {
     appointmentsRepository = new FakeAppointmentsRepository()
+    notificationsRepository = new FakeNotificationsRepository()
 
     createAppointment = new CreateAppointmentService(
-      appointmentsRepository
+      appointmentsRepository,
+      notificationsRepository
     )
   })
 

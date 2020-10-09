@@ -1,3 +1,4 @@
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository'
 import CreateAppointmentService from './CreateAppointmentService'
 
@@ -6,13 +7,16 @@ import ListProviderAppointmentsService from './ListProviderAppointmentsService'
 let createAppointment: CreateAppointmentService
 let fakeAppointmentsRepository: FakeAppointmentsRepository
 let listProviderAppointments: ListProviderAppointmentsService
+let notificationsRepository: FakeNotificationsRepository
 
 describe('List Provider Appointments', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository()
+    notificationsRepository = new FakeNotificationsRepository()
 
     createAppointment = new CreateAppointmentService(
-      fakeAppointmentsRepository
+      fakeAppointmentsRepository,
+      notificationsRepository
     )
 
     listProviderAppointments = new ListProviderAppointmentsService(
