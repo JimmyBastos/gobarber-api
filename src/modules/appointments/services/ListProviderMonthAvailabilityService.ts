@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import IAppointmentRepository from '../repositories/IAppointmentRepository'
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository'
 
 import User from '@modules/users/infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError'
@@ -20,8 +20,8 @@ type IResponse = Array<{
 @injectable()
 class ListProviderMonthAvailabilityService {
   constructor (
-     @inject('AppointmentRepository')
-    private appointmentsRepository: IAppointmentRepository
+     @inject('AppointmentsRepository')
+    private appointmentsRepository: IAppointmentsRepository
   ) { }
 
   public async execute ({ provider_id, month, year }: IRequest): Promise<IResponse> {

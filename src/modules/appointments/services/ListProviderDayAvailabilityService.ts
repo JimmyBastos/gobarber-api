@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
-import IAppointmentRepository from '../repositories/IAppointmentRepository'
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository'
 
 import { getHours, isAfter } from 'date-fns'
 
@@ -19,8 +19,8 @@ type IResponse = Array<{
 @injectable()
 class ListProviderDayAvailabilityService {
   constructor (
-     @inject('AppointmentRepository')
-    private appointmentsRepository: IAppointmentRepository
+     @inject('AppointmentsRepository')
+    private appointmentsRepository: IAppointmentsRepository
   ) { }
 
   public async execute ({ provider_id, day, month, year }: IRequest): Promise<IResponse> {

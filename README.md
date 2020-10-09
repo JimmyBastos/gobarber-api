@@ -36,7 +36,7 @@
 
 - [x] O usuário não pode alterar um email para outro já utilizado;
 
-- [ ] Para alterar sua senha o usuário deve informar sua senha antiga;
+- [x] Para alterar sua senha o usuário deve informar sua senha antiga;
 
 - [x] Para alterar sua senha o usuário precisa confirmar a nova senha;
 
@@ -46,7 +46,7 @@
 
 **Requisitos Funcionais**
 
-- [ ] O usuário deve poder listar seus agendamentos em um dia específico;
+- [z] O usuário deve poder listar seus agendamentos em um dia específico;
 
 - [ ] O prestador dever receber uma notificação sempre que houver um novo agendamento;
 
@@ -70,23 +70,25 @@
 
 **Requisitos Funcionais**
 
-- [ ] O usuário deve poder listar todos os prestadores de serviço cadastrados;
+- [x] O usuário deve poder listar todos os prestadores de serviço cadastrados;
 
-- [ ] O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um presatador;
+- [x] O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um presatador;
 
-- [ ] O usuário deve poder listar horários disponiveeis em um dia especifico de um prestador;
+- [x] O usuário deve poder listar horários disponiveeis em um dia especifico de um prestador;
 
-- [ ] O usuário deve poder realizar um novo agendamento com um prestador;
+- [x] O usuário deve poder realizar um novo agendamento com um prestador;
 
 **Regras de Negócio**
 
 - [ ] Cada agendamento devem durar 1h hora exatamente;
 
-- [ ] Os agendamentos devem estar disponíveis de 8h às 18h (primeiros às 8h, ultimo às 18h);
+- [x] Os agendamentos devem estar disponíveis de 8h às 18h (primeiros às 8h, ultimo às 18h);
 
-- [ ] O usuário não pode agendar em um horário já ocupado;
+- [x] O usuário não pode agendar em um horário que já passou;
 
-- [ ] O usuário não pode agendar serviços consigo mesmo;
+- [x] O usuário não pode agendar em um horário já ocupado;
+
+- [x] O usuário não pode agendar serviços consigo mesmo;
 
 **Requisitos Não Funcionais**
 

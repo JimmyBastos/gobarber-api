@@ -1,6 +1,6 @@
 import { uuid } from 'uuidv4'
 
-import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentRepository'
+import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository'
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO'
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment'
@@ -8,7 +8,7 @@ import { isEqual, getMonth, getYear, getDate } from 'date-fns'
 import IFindAllProviderAppointmentsInMonthDTO from '@modules/appointments/dtos/IFindAllProviderAppointmentsInMonthDTO'
 import IFindAllProviderAppointmentsInDayDTO from '@modules/appointments/dtos/IFindAllProviderAppointmentsInDayDTO'
 
-class FakeAppointmentsRepository implements IAppointmentRepository {
+class FakeAppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = []
 
   public async create ({ provider_id, customer_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
