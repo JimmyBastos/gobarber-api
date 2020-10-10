@@ -1,6 +1,8 @@
 import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
+import { classToClass } from 'class-transformer'
+
 import authConfig from '@config/auth'
 import AppError from '@shared/errors/AppError'
 
@@ -40,8 +42,6 @@ class AuthenticateUserService {
       throw new AppError('Incorrect email/password combination.', 401)
     }
 
-    delete user.password
-
     const token = sign({}, authConfig.jwt.secret, {
       subject: user.id,
       expiresIn: '1d'
@@ -49,7 +49,7 @@ class AuthenticateUserService {
 
     return {
       token,
-      user
+      user: classToClass(user)
     }
   }
 }

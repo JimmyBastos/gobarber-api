@@ -1,3 +1,5 @@
+import { classToClass } from 'class-transformer'
+
 import { inject, injectable } from 'tsyringe'
 
 import AppError from '@shared/errors/AppError'
@@ -23,9 +25,7 @@ class ShowProfileService {
       throw new AppError('Invalid User', 404)
     }
 
-    delete user.password
-
-    return user
+    return classToClass(user)
   }
 }
 
