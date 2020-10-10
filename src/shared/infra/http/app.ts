@@ -8,6 +8,7 @@ import handleErrors from '@shared/infra/http/middlewares/handleErrors'
 
 import '@shared/infra/typeorm'
 import '@shared/container'
+import { errors as handleValidationErrors } from 'celebrate'
 
 const app = express()
 
@@ -15,6 +16,8 @@ app.use(cors())
 app.use(express.json())
 
 app.use(routes)
+
+app.use(handleValidationErrors({ statusCode: 422 }))
 
 app.use(handleErrors)
 
