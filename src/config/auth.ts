@@ -1,6 +1,6 @@
 const authConfig = {
   jwt: {
-    secret: process.env.APP_SECRET
+    secret: process.env.APP_SECRET as string
   }
 }
 

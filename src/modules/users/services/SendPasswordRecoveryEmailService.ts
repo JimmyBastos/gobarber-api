@@ -48,7 +48,7 @@ class SendPasswordRecoveryEmailService {
         file: recoverPasswordTemplate,
         varibales: {
           name: user.name,
-          link: `https://localhost:3000/reset-password?token=${token}`
+          link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`
         }
       }
     })
