@@ -1,12 +1,10 @@
 import { celebrate, Joi, Segments } from 'celebrate'
 
-class ProviderMonthAvailabilityValidator {
+class ProviderAppointmentsValidator {
   public list () {
     return celebrate({
-      [Segments.PARAMS]: {
-        provider_id: Joi.string().uuid()
-      },
       [Segments.QUERY]: {
+        day: Joi.number().min(1).max(31).required(),
         month: Joi.number().min(1).max(12).required(),
         year: Joi.number().required()
       }
@@ -14,4 +12,4 @@ class ProviderMonthAvailabilityValidator {
   }
 }
 
-export default ProviderMonthAvailabilityValidator
+export default ProviderAppointmentsValidator
