@@ -1,5 +1,7 @@
 import nodemailer, { Transporter } from 'nodemailer'
 
+import mailConfig from '@config/mail'
+
 import IMailProvider from '../contracts/IMailProvider'
 import ISendMailDTO from '../dtos/ISendMailDTO'
 import IMailTemplateProvider from '@shared/providers/MailTemplateProvider/contracts/IMailTemplateProvider'
@@ -27,14 +29,16 @@ class EtherealMailProvider implements IMailProvider {
   }
 
   async sendMail ({ to, from, subject, templateData }: ISendMailDTO): Promise<void> {
+    const { name, email } = mailConfig.defaults.from
+
     const template = this.mailTemplateProvider.parse(templateData)
 
     const message = await this.client.sendMail({
       subject: subject,
       html: await template,
       from: {
-        name: from?.name || 'Equipe GoBarber',
-        address: from?.email || 'contato@gobarber.com.br'
+        name: from?.name || name,
+        address: from?.email || email
       },
       to: {
         name: to.name,
