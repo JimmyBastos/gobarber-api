@@ -13,9 +13,10 @@ class AppointmentsRepository implements IAppointmentsRepository {
     this.ormRepository = getRepository(Appointment)
   }
 
-  public async create ({ provider_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
+  public async create ({ provider_id, customer_id, date }: ICreateAppointmentDTO): Promise<Appointment> {
     const appointment = this.ormRepository.create({
       provider_id,
+      customer_id,
       date
     })
 
@@ -33,12 +34,12 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   public async findAllFromProviderInMonth ({ provider_id, month, year }: IFindAllProviderAppointmentsInMonthDTO): Promise<Appointment[]> {
-    const targetMonth = formatDate(new Date(`${year}-${month}`), 'YYYY-MM')
+    const targetMonth = formatDate(new Date(`${year}-${month}`), 'yyyy-MM')
 
     const appointmentList = this.ormRepository.find({
       where: {
         provider_id,
-        date: Raw(dateField => `to_char(${dateField}, 'YYYY-MM') = '${targetMonth}'`)
+        date: Raw(dateField => `to_char(${dateField}, 'yyyy-MM') = '${targetMonth}'`)
       }
     })
 
@@ -46,12 +47,10 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }
 
   public async findAllFromProviderInDay ({ provider_id, day, month, year }: IFindAllProviderAppointmentsInDayDTO): Promise<Appointment[]> {
-    const targetMonth = formatDate(new Date(`${year}-${month}-${day}`), 'YYYY-MM-DD')
-
     const appointmentList = this.ormRepository.find({
       where: {
         provider_id,
-        date: Raw(dateField => `to_char(${dateField}, 'YYYY-MM-DD') = '${targetMonth}'`)
+        date: Raw(dateField => `(${dateField})::DATE = '${year}-${month}-${day}'::DATE`)
       }
     })
 
