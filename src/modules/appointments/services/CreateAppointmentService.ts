@@ -44,7 +44,7 @@ class CreateAppointmentService {
       appointmentDate
     )
 
-    if (foundAppointmentInSameDate) {
+    if (foundAppointmentInSameDate && foundAppointmentInSameDate.provider_id === provider_id) {
       throw new AppError('This appointment is already booked', 422)
     }
 
@@ -62,7 +62,7 @@ class CreateAppointmentService {
     })
 
     this.cacheProvider.invalidate(
-      `provider-appointments:${provider_id}:${formatDate(appointmentDate, 'YYYY-M-d')}`
+      `provider-appointments:${provider_id}:${formatDate(appointmentDate, 'yyyy-M-d')}`
     )
 
     return appointment
