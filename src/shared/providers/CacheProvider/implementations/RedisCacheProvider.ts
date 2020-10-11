@@ -1,6 +1,5 @@
 import cacheConfig from '@config/cache'
 import Redis, { Redis as RedisClient } from 'ioredis'
-import { pipeline } from 'nodemailer/lib/xoauth2'
 
 import ICacheProvider from '../contracts/ICacheProvider'
 
