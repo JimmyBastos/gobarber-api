@@ -1,17 +1,20 @@
-import AppError from '@shared/errors/AppError'
-
 import ListProvidersService from './ListProvidersService'
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository'
+import FakeCacheProvider from '@shared/providers/CacheProvider/fakes/FakeCacheProvider'
+
+let listProfile: ListProvidersService
 
 let fakeUsersRepository: FakeUsersRepository
-let listProfile: ListProvidersService
+let cacheProvider: FakeCacheProvider
 
 describe('List Providers', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository()
+    cacheProvider = new FakeCacheProvider()
 
     listProfile = new ListProvidersService(
-      fakeUsersRepository
+      fakeUsersRepository,
+      cacheProvider
     )
   })
 

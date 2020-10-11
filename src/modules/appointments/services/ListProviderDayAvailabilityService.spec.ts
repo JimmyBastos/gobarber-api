@@ -1,6 +1,3 @@
-import AppError from '@shared/errors/AppError'
-import { promises } from 'fs'
-
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository'
 
 import ListProviderDayAvailabilityService from './ListProviderDayAvailabilityService'

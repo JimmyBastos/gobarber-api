@@ -3,19 +3,23 @@ import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRe
 import AppError from '@shared/errors/AppError'
 
 import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository'
+import FakeCacheProvider from '@shared/providers/CacheProvider/fakes/FakeCacheProvider'
 
 let createAppointment: CreateAppointmentService
 let appointmentsRepository: FakeAppointmentsRepository
 let notificationsRepository: FakeNotificationsRepository
+let cacheProvider: FakeCacheProvider
 
 describe('Create Appointment', () => {
   beforeEach(() => {
     appointmentsRepository = new FakeAppointmentsRepository()
     notificationsRepository = new FakeNotificationsRepository()
+    cacheProvider = new FakeCacheProvider()
 
     createAppointment = new CreateAppointmentService(
       appointmentsRepository,
-      notificationsRepository
+      notificationsRepository,
+      cacheProvider
     )
   })
 
