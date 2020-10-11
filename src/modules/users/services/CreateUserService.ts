@@ -3,8 +3,10 @@ import { inject, injectable } from 'tsyringe'
 import AppError from '@shared/errors/AppError'
 
 import User from '../infra/typeorm/entities/User'
+
 import IUsersRepository from '../repositories/IUsersRepository'
 import IHashProvider from '../providers/HashProvider/contracts/IHashProvider'
+import ICacheProvider from '@shared/providers/CacheProvider/contracts/ICacheProvider'
 
 interface IRequest {
   name: string
@@ -18,7 +20,9 @@ class CreateUserService {
     @inject('UserRepository')
     private usersRepository: IUsersRepository,
     @inject('HashProvider')
-    private hashProvider: IHashProvider
+    private hashProvider: IHashProvider,
+     @inject('CacheProvider')
+    private cacheProvider: ICacheProvider
   ) { }
 
   public async execute ({ name, email, password }: IRequest): Promise<User> {
@@ -35,6 +39,8 @@ class CreateUserService {
       email,
       password: hashedPassword
     })
+
+    this.cacheProvider.invalidatePrefix('providers')
 
     return user
   }
