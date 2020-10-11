@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import isAuthenticated from '@modules/users/infra/http/middlewares/isAuthenticated'
 import multer from 'multer'
-import uploadConfig from '@config/upload'
+import storageConfig from '@config/storage'
 
 import UsersController from '../controllers/UsersController'
 import UsersValidator from '../validators/UsersValidator'
@@ -14,7 +14,7 @@ const usersController = new UsersController()
 const usersValidator = new UsersValidator()
 const userAvatarController = new UserAvatarController()
 
-const upload = multer(uploadConfig)
+const upload = multer(storageConfig.config.multer)
 
 usersRouter.post('/', usersValidator.create(), usersController.create)
 

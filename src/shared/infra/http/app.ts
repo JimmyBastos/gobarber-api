@@ -4,7 +4,7 @@ import 'dotenv/config'
 import 'express-async-errors'
 import express from 'express'
 import cors from 'cors'
-import uploadConfig from '@config/upload'
+import storageConfig from '@config/storage'
 import routes from '@shared/infra/http/routes'
 import handleErrors from '@shared/infra/http/middlewares/handleErrors'
 
@@ -23,6 +23,6 @@ app.use(handleValidationErrors({ statusCode: 422 }))
 
 app.use(handleErrors)
 
-app.use('/files', express.static(uploadConfig.tempFolder))
+app.use('/files', express.static(storageConfig.tempFolder))
 
 export default app
