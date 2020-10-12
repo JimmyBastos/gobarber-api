@@ -6,6 +6,7 @@ import { errors as handleValidationErrors } from 'celebrate'
 
 import express from 'express'
 import cors from 'cors'
+import morgan from 'morgan'
 import storageConfig from '@config/storage'
 import routes from '@shared/infra/http/routes'
 import handleErrors from '@shared/infra/http/middlewares/handleErrors'
@@ -19,6 +20,8 @@ const app = express()
 app.use(cors())
 
 app.use(express.json())
+
+app.use(morgan('dev'))
 
 app.use(rateLimiter)
 
