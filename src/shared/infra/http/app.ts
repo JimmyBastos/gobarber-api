@@ -1,21 +1,26 @@
 import 'reflect-metadata'
 import 'dotenv/config'
-
 import 'express-async-errors'
+
+import { errors as handleValidationErrors } from 'celebrate'
+
 import express from 'express'
 import cors from 'cors'
 import storageConfig from '@config/storage'
 import routes from '@shared/infra/http/routes'
 import handleErrors from '@shared/infra/http/middlewares/handleErrors'
+import rateLimiter from '@shared/infra/http/middlewares/rateLimiter'
 
 import '@shared/infra/typeorm'
 import '@shared/container'
-import { errors as handleValidationErrors } from 'celebrate'
 
 const app = express()
 
 app.use(cors())
+
 app.use(express.json())
+
+app.use(rateLimiter)
 
 app.use(routes)
 
