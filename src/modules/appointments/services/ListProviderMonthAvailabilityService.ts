@@ -4,7 +4,7 @@ import IAppointmentsRepository from '../repositories/IAppointmentsRepository'
 
 import User from '@modules/users/infra/typeorm/entities/User'
 import AppError from '@shared/errors/AppError'
-import { getDate, getDaysInMonth, isAfter } from 'date-fns'
+import { endOfDay, getDate, getDaysInMonth, isAfter } from 'date-fns'
 
 interface IRequest {
   provider_id: string,
@@ -36,13 +36,16 @@ class ListProviderMonthAvailabilityService {
     const eachDayInMonth = Array.from(Array(numberOfDaysInMonth), (_, i) => i + 1)
 
     const availablility = eachDayInMonth.map(day => {
+      const currentDate = new Date(Date.now())
+      const dayInMonthDate = endOfDay(new Date(year, month - 1, day))
+
       const appointmentsInDay = appointments.filter(
         appointment => getDate(appointment.date) === day
       )
 
       return {
         day,
-        available: appointmentsInDay.length < 10
+        available: appointmentsInDay.length < 10 && isAfter(dayInMonthDate, currentDate)
       }
     })
 
