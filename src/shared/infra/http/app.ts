@@ -23,6 +23,8 @@ app.use(express.json())
 
 app.use(morgan('dev'))
 
+app.use('/files', express.static(storageConfig.tempFolder))
+
 app.use(rateLimiter)
 
 app.use(routes)
@@ -30,7 +32,5 @@ app.use(routes)
 app.use(handleValidationErrors({ statusCode: 422 }))
 
 app.use(handleErrors)
-
-app.use('/files', express.static(storageConfig.tempFolder))
 
 export default app
